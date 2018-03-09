@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<style>
+table {
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: 1px solid black;
+}
+</style>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+
+<table border=1>
+    <tr>
+        <th>video Id</th>
+        <th>channel Title</th>
+        <th>Title</th>
+    </tr>
+    <tr th:each="v : ${videos}">
+        <td th:text="${v.video_id}">1</td>
+        <td th:text="${v.channel_title}">test</td>
+        <td th:text="${v.title}">test1</td>
+    </tr>
+</table>
+
+</body>
+</html>

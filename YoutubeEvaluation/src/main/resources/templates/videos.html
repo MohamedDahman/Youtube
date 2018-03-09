@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<meta charset="UTF-8"/>
+
+<style>
+table {
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: 1px solid black;
+}
+</style>
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+<h3>Videos</h3>
+<h3 th:text="${CN1}">first Country</h3>
+
+<table border=1>
+    <tr>
+        <th>video_id</th>
+        <th>channel Title</th>
+        <th>Title</th>
+    </tr>
+
+    <tr th:each="video : ${videos}">
+        <td th:text="${video.video_id}">1</td>
+        <td th:text="${video.channel_title}">test</td>
+        <td th:text="${video.title}">test1</td>
+    </tr>
+</table>
+
+<br>
+<br>
+
+<h3 th:text="${CN2}">1</h3>
+<table border=1>
+    <tr>
+        <th>video_id</th>
+        <th>channel Title</th>
+        <th>Title</th>
+    </tr>
+
+    <tr th:each="v : ${ss}">
+        <td th:text="${v.video_id}">1</td>
+        <td th:text="${v.channel_title}">test</td>
+        <td th:text="${v.title}">test1</td>
+    </tr>
+</table>
+
+</body>
+</html>
