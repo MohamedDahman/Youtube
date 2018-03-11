@@ -1,6 +1,8 @@
-package com.example.demo.controller;
+package com.example.demo.view;
 
 
+import com.example.demo.model.Video;
+import com.example.demo.parser.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,20 +22,17 @@ public class GreetingsEndpoint {
         return "videos";
     }
 
-    @ModelAttribute("welcome")
-    String sayHi() {
-        return "Hello Where are you!";
-    }
 
     @ModelAttribute("videos")
-    List<model.Video> videos(Model model){
-        parser.Parser parser = new parser.Parser();
+    List<Video> videos(Model model){
+        Parser parser = new Parser();
         model.addAttribute("CN1","Canada");
-        List<model.Video> videos =
+
+        List<Video> videos =
                 parser.getDataFromFile("src/main/java/com/example/demo/data/CAvideos.csv", "CA");
 
         model.addAttribute("CN2","USA");
-        List<model.Video> videos1 =
+        List<Video> videos1 =
                 parser.getDataFromFile("src/main/java/com/example/demo/data/USvideos.csv", "USA");
         model.addAttribute("ss",videos1);
 

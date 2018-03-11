@@ -1,31 +1,45 @@
 package com.example.demo.parser;
 
-import model.Video;
+import com.example.demo.model.CountriesFiles;
+import com.example.demo.model.Video;
+
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Parser {
 
-    public static List<Video> getDataFromFile(String fileName,String country) {
+    public List<Video> getDataOneCountry(String country){
+     CountriesFiles countriesFiles = new CountriesFiles();
+        Map countryMap = countriesFiles.countryData();
+        List<Video> videos = new ArrayList<>();
+        for (Object countries : countryMap.keySet()) {
+            if (countries.toString().equalsIgnoreCase(country)) {
+                Parser parser = new Parser();
+                videos = parser.getDataFromFile(countryMap.get(countries).toString(), countries.toString());
+            }
+        }
+       return  videos;
+
+    }
+
+
+    public static List<Video> getDataFromFile(String fileName, String country) {
         List<String> list = new ArrayList<>();
         try {
             list = Files.readAllLines(Paths.get(fileName));
             List<Video> collect = list.stream()
                     .skip(1)
                     .map(e -> e.split(","))
-
-
-                    .filter(e-> e.length == 16)
-                    .filter(e-> e[1].length()==8)
-                    //.peek(e-> System.out.println(e[0]))
-                    .map(e -> getToVideo(e,country))
-                    .limit(10)
+                    .filter(e -> e.length == 16)
+                    .filter(e -> e[1].length() == 8)
+                    .map(e -> getToVideo(e, country))
                     .collect(Collectors.toList());
             return collect;
         } catch (IOException e) {
@@ -41,11 +55,10 @@ public class Parser {
         video.setTitle(e[2]);
         video.setCountry(country);
         String tags = e[6];
-        tags.replaceAll("\"","");
+        tags.replaceAll("\"", "");
         String[] splitTags = tags.split("|");
-        List<String>  taglist= Stream.of(splitTags).collect(Collectors.toList());
+        List<String> taglist = Stream.of(splitTags).collect(Collectors.toList());
         video.setTags(taglist);
-
         video.setChannel_title(e[3]);
 
         try {

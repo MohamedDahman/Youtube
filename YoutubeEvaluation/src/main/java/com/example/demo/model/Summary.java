@@ -1,12 +1,4 @@
 package model;
-import com.example.demo.model.CountriesFiles;
-import com.example.demo.model.Video;
-import com.example.demo.parser.Parser;
-
-import java.util.List;
-import java.util.Map;
-
-import static com.example.demo.controller.YoutubeControl.*;
 
 public class Summary {
 

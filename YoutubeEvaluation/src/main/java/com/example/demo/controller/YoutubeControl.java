@@ -1,13 +1,15 @@
 package com.example.demo.controller;
 
-import model.Video;
+
+import com.example.demo.model.Video;
+
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class YoutubeControl {
 
-    public static void getVideoByMoreDisLike(List<Video> allVideo,Integer limitvalue,String country) {
+    public static void getVideoByMoreDisLike(List<Video> allVideo, Integer limitvalue, String country) {
         allVideo.stream()
                 .filter(e->e.getCountry().equals(country))
                 .sorted((e1,e2)->e2.getDislikes().compareTo(e1.getDislikes()))
@@ -44,12 +46,10 @@ public class YoutubeControl {
                .sorted((e1,e2)->e2.getValue().compareTo(e1.getValue()))
                .limit(limitvalue)
                .forEach(e-> System.out.println(e));
-
-
    }
    public  static List<Map.Entry<String, Long>> getMostChannelHaveVideo(List<Video> allVideo,Integer limitValue,String country){
-       Map<String, Long> collect = allVideo.stream()
-               .filter(e->e.getCountry().equals(country))
+        Map<String, Long> collect = allVideo.stream()
+               .filter(e->e.getCountry().equalsIgnoreCase(country))
                .map(e -> e.getChannel_title())
                .collect(Collectors.groupingBy(e -> e, Collectors.counting()));
 
@@ -61,7 +61,6 @@ public class YoutubeControl {
        return collect1;
    }
 
-
    public static List<String> getMostChanelHaveVideoAsList(List<Video> allVideo, Integer limitValue, String country){
        List<Map.Entry<String, Long>> mostChannelHaveVideo = getMostChannelHaveVideo(allVideo, limitValue, country);
        List<String> collect = mostChannelHaveVideo.stream()
@@ -69,8 +68,6 @@ public class YoutubeControl {
                .collect(Collectors.toList());
        return collect;
    }
-
-
 
     public static void getVideoByMoreDisLikeAllCountry(List<Video> allVideo,Integer limitvalue) {
         allVideo.stream()
@@ -105,8 +102,6 @@ public class YoutubeControl {
                 .sorted((e1,e2)->e2.getValue().compareTo(e1.getValue()))
                 .limit(limitvalue)
                 .forEach(e-> System.out.println(e));
-
-
     }
     public  static List<Map.Entry<String, Long>> getMostChannelHaveVideoAllCountry(List<Video> allVideo,Integer limitValue){
         Map<String, Long> collect = allVideo.stream()
@@ -129,8 +124,6 @@ public class YoutubeControl {
                 .collect(Collectors.toList());
         return collect;
     }
-
-
 
 
 

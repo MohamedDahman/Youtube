@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <style>
 table {
     border-collapse: collapse;
@@ -18,14 +19,10 @@ table, td, th {
 
 <table border=1>
     <tr>
-        <th>video Id</th>
-        <th>channel Title</th>
-        <th>Title</th>
+        <th>Channel Title</th>
     </tr>
     <tr th:each="v : ${videos}">
-        <td th:text="${v.video_id}">1</td>
-        <td th:text="${v.channel_title}">test</td>
-        <td th:text="${v.title}">test1</td>
+        <td th:text="${v}">1</td>
     </tr>
 </table>
 
