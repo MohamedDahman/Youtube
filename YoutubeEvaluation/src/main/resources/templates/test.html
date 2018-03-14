@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>Participants</title>
+</head>
+<body>
+
+<h3>Test video</h3>
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="testVideo : ${testVideos}">
+        <td th:text="${testVideo.id}">1</td>
+        <td th:text="${testVideo.name}">videoname </td>
+        <td>
+            <form th:action="@{/testVideo/{id}(id=${testVideo.id})}" th:method="delete">
+                <button type="submit">Remove</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<!--
+
+<h3>Add new participant</h3>
+<form th:object="${testVideo}" th:action="@{/testVideos}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    <input type="text" th:field="*{name}" placeholder="Name" autofocus="autofocus" />
+    <button type="submit">Add</button>
+    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name error message</div>
+</form>
+-->
+</body>
+</html>

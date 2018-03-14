@@ -1,18 +1,16 @@
 package com.example.demo.model;
 
+
+
+import org.springframework.data.annotation.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import java.util.Date;
 import java.util.List;
 
 
-public class Video {
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
+public class Video
+{
 
     private String country;
     private String video_id	;
@@ -27,6 +25,15 @@ public class Video {
     private Integer comment_count;
     private String thumbnail_link;
     private String description;
+
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
     @Override
     public String toString() {
