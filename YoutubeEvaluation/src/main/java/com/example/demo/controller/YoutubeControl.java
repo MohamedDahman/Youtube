@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.model.Video;
+import com.example.demo.persistence.Video;
 
 import java.util.List;
 import java.util.Map;
@@ -14,7 +14,7 @@ public class YoutubeControl {
                 .filter(e->e.getCountry().equals(country))
                 .sorted((e1,e2)->e2.getDislikes().compareTo(e1.getDislikes()))
                 .limit(limitvalue)
-                .map(e->e.getVideo_id()+" "+e.getDislikes())
+                .map(e->e.getTitle()+" "+e.getDislikes())
                 .forEach(e-> System.out.println(e));
     }
     public static void getVideoByMoreLike(List<Video> allVideo,Integer limitvalue,String country){
@@ -22,7 +22,7 @@ public class YoutubeControl {
                  .filter(e->e.getCountry().equals(country))
                  .sorted((e1,e2)->e2.getLikes().compareTo(e1.getLikes()))
                  .limit(limitvalue)
-                 .map(e->e.getVideo_id()+" "+e.getLikes())
+                 .map(e->e.getTitle()+" "+e.getLikes())
                  .forEach(e-> System.out.println(e));
     }
 
@@ -32,7 +32,7 @@ public class YoutubeControl {
                 .filter(e->e.getCountry().equals(country))
                 .sorted((e1, e2) -> e2.getViews().compareTo(e1.getViews()))
                 .limit(limitvalue)
-                .map(e->e.getVideo_id()+" "+e.getViews())
+                .map(e->e.getTitle()+" "+e.getViews())
                 .forEach(e-> System.out.println(e));
     }
 
@@ -73,14 +73,14 @@ public class YoutubeControl {
         allVideo.stream()
                 .sorted((e1,e2)->e2.getDislikes().compareTo(e1.getDislikes()))
                 .limit(limitvalue)
-                .map(e->e.getCountry()+" "+e.getVideo_id()+" "+e.getDislikes())
+                .map(e->e.getCountry()+" "+e.getTitle()+" "+e.getDislikes())
                 .forEach(e-> System.out.println(e));
     }
     public static void getVideoByMoreLikeAllCountry(List<Video> allVideo,Integer limitvalue){
         allVideo.stream()
                 .sorted((e1,e2)->e2.getLikes().compareTo(e1.getLikes()))
                 .limit(limitvalue)
-                .map(e->e.getCountry()+" "+e.getVideo_id()+" "+e.getLikes())
+                .map(e->e.getCountry()+" "+e.getTitle()+" "+e.getLikes())
                 .forEach(e-> System.out.println(e));
     }
 
@@ -89,7 +89,7 @@ public class YoutubeControl {
         allVideo.stream()
                 .sorted((e1, e2) -> e2.getViews().compareTo(e1.getViews()))
                 .limit(limitvalue)
-                .map(e->e.getCountry()+" "+e.getVideo_id()+" "+e.getViews())
+                .map(e->e.getCountry()+" "+e.getTitle()+" "+e.getViews())
                 .forEach(e-> System.out.println(e));
     }
 
@@ -124,8 +124,6 @@ public class YoutubeControl {
                 .collect(Collectors.toList());
         return collect;
     }
-
-
 
 
 }

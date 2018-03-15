@@ -1,30 +1,71 @@
-package com.example.demo.model;
+package com.example.demo.persistence;
 
 
+import org.hibernate.Hibernate;
 
-import org.springframework.data.annotation.Id;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
-public class Video
-{
-
+@Entity
+public class Video {
+    @Id
+    @GeneratedValue
+    private Long Id;
     private String country;
-    private String video_id	;
+
     private Date trending_date;
-    private String title	;
+    private String title;
     private String channel_title;
     private Integer category_id;
-    private List<String> tags;
+
+    @ManyToMany
+    private List<Tag> tags = new ArrayList<>();
+
     private Integer views;
     private Integer likes;
     private Integer dislikes;
     private Integer comment_count;
     private String thumbnail_link;
     private String description;
+
+
+    public Video() {
+
+    }
+
+    public Video(Date trending_date, String title, String channel_title, Integer category_id, List<Tag> tags, Integer views, Integer likes, Integer dislikes, Integer comment_count, String thumbnail_link, String description) {
+        // TODO: 3/14/2018
+        this.trending_date = trending_date;
+        this.title = title;
+        this.channel_title = channel_title;
+        this.category_id = category_id;
+        this.tags = tags;
+        this.views = views;
+        this.likes = likes;
+        this.dislikes = dislikes;
+        this.comment_count = comment_count;
+        this.thumbnail_link = thumbnail_link;
+        this.description = description;
+    }
+
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags.clear();
+        this.tags.addAll(tags);
+    }
 
 
     public String getCountry() {
@@ -37,25 +78,35 @@ public class Video
 
     @Override
     public String toString() {
-        return "Video{" +
+        String result;
+        result = "Video{" +
                 "Country ='" + country + '\'' +
-                ", video_id='" + video_id + '\'' +
+                ", Id='" + Id + '\'' +
                 ", title='" + title + '\'' +
                 ", channel_title='" + channel_title + '\'' +
                 ", category_id=" + category_id +
                 ", views=" + views +
                 ", likes=" + likes +
                 ", dislikes=" + dislikes +
+                //           ", tags=" + ((Hibernate.isInitialized(tags)) ? (tags == null ? "NULL" : tags) : "NOT INITIALIZED") +
                 '}';
+
+        if (Hibernate.isInitialized(tags)) {
+            if (!tags.isEmpty()) {
+                System.out.println("here1");
+                for (Tag tag : tags) {
+                    System.out.println("here2");
+                    result += String.format(
+                            "Tags[id=%d, name='%s']%n",
+                            tag.getId(), tag.getName());
+                }
+
+            }
+        }
+        return result;
     }
 
-    public String getVideo_id() {
-        return video_id;
-    }
 
-    public void setVideo_id(String video_id) {
-        this.video_id = video_id;
-    }
 
     public Date getTrending_date() {
         return trending_date;
@@ -89,13 +140,6 @@ public class Video
         this.category_id = category_id;
     }
 
-    public List<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
 
     public Integer getViews() {
         return views;
@@ -142,25 +186,6 @@ public class Video
     }
 
     public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Video()
-    {
-
-    }
-    public Video(String video_id, Date trending_date, String title, String channel_title, Integer category_id, List<String> tags, Integer views, Integer likes, Integer dislikes, Integer comment_count, String thumbnail_link, String description) {
-        this.video_id = video_id;
-        this.trending_date = trending_date;
-        this.title = title;
-        this.channel_title = channel_title;
-        this.category_id = category_id;
-        this.tags = tags;
-        this.views = views;
-        this.likes = likes;
-        this.dislikes = dislikes;
-        this.comment_count = comment_count;
-        this.thumbnail_link = thumbnail_link;
         this.description = description;
     }
 }

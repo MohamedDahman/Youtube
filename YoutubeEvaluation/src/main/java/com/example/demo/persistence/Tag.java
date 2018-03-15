@@ -1,25 +1,27 @@
 package com.example.demo.persistence;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class TestVideo {
+public class Tag {
 
     @Id
     @GeneratedValue
-    private Long id;
-
+    private Integer Id;
+    @Column(nullable = false)
     @NotNull
     private String name;
 
-    public TestVideo(String name) {
-        this.name = name;
+    public Integer getId() {
+        return Id;
     }
 
-    public TestVideo() {
+    public void setId(Integer id) {
+        this.Id = id;
     }
 
     public String getName() {
@@ -30,20 +32,14 @@ public class TestVideo {
         this.name = name;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public Tag() {
     }
 
     @Override
     public String toString() {
-        return "TestVideo{" +
-                "id=" + id +
+        return "Tag{" +
+                "Id=" + Id +
                 ", name='" + name + '\'' +
                 '}';
     }
 }
-

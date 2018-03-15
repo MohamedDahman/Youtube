@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Video;
+import com.example.demo.persistence.Video;
 import com.example.demo.parser.Parser;
 
 import java.util.ArrayList;

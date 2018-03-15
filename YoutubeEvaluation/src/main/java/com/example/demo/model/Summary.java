@@ -4,10 +4,10 @@ public class Summary {
 
     public void getResult() {
 
-    /*    CountriesFiles countriesFiles = new CountriesFiles();
-        Map countryMap = countriesFiles.countryData();
-        List<Video> allVideoTogether = null;
-        for (Object countries : countryMap.keySet()) {
+    /*      CountriesFiles countriesFiles = new CountriesFiles();
+            Map countryMap = countriesFiles.countryData();
+            List<Video> allVideoTogether = null;
+            for (Object countries : countryMap.keySet()) {
             System.out.println("This Part Belong to " + countries.toString());
             System.out.println("----------------------"+countries.toString()+"-----------------");
             Parser parser = new Parser();

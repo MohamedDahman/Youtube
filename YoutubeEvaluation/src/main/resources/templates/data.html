@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+<table>
+    <tr>
+        <th>title</th>
+        <th>channel_title</th>
+        <th>views</th>
+        <th>likes</th>
+        <th>tags</th>
+    </tr>
+    <tr th:each="v : ${videodata}">
+        <td th:text="${v.title}">1</td>
+        <td th:text="${v.channel_title}">1</td>
+        <td th:text="${v.views}">1</td>
+        <td th:text="${v.likes}">1</td>
+
+    </tr>
+
+
+</table>
+
+</body>
+</html>

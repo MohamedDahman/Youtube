@@ -1,7 +1,7 @@
 package com.example.demo.view;
 
 
-import com.example.demo.model.Video;
+import com.example.demo.persistence.Video;
 import com.example.demo.parser.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
