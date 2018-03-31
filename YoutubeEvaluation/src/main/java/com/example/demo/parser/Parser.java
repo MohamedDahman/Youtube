@@ -18,6 +18,7 @@ import java.util.stream.Stream;
 
 public class Parser {
 
+    
     private VideoRepository videoRepository;
     private TagRepository tagRepository;
 

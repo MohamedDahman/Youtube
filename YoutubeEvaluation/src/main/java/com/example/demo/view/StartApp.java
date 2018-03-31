@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/index")
+@RequestMapping("/index1")
 public class StartApp {
 
     @GetMapping
     String page()
     {
-        return "index";
+        return "index1";
     }
 
 

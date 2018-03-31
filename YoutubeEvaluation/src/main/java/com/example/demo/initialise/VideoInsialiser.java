@@ -10,10 +10,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Stream;
 
 @Configuration
 public class VideoInsialiser {
@@ -24,9 +20,8 @@ public class VideoInsialiser {
 
 
             Parser parser = new Parser(videoRepository, tagRepository);
+
             parser.moveDateFromFilesToDataBase("USA");
-
-
 
             videoRepository.findAll().forEach(System.out::println);
 
