@@ -2,7 +2,6 @@ package com.example.demo.parser;
 
 import com.example.demo.model.CountriesFiles;
 import com.example.demo.persistence.Tag;
-import com.example.demo.persistence.TagRepository;
 import com.example.demo.persistence.Video;
 import com.example.demo.persistence.VideoRepository;
 
@@ -10,7 +9,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -20,15 +18,14 @@ public class Parser {
 
     
     private VideoRepository videoRepository;
-    private TagRepository tagRepository;
+
 
     public Parser()
     {
 
     }
-    public Parser(VideoRepository videoRepository, TagRepository tagRepository) {
+    public Parser(VideoRepository videoRepository) {
         this.videoRepository = videoRepository;
-        this.tagRepository = tagRepository;
     }
 
     public void moveDateFromFilesToDataBase(String country){
@@ -40,7 +37,12 @@ public class Parser {
                 List<String> list = new ArrayList<>();
                 String fileName = countryMap.get(countries).toString();
                 try {
-                    list = Files.readAllLines(Paths.get(fileName));
+                    System.out.println(fileName);
+                    String newFileName = "C:\\java\\youtubeEvaluation\\YoutubeEvaluation\\src\\main\\java\\com\\example\\demo\\data\\USvideos.csv";
+
+                    System.out.println(Paths.get(fileName).toAbsolutePath());
+
+                    list = Files.readAllLines(Paths.get(newFileName));
                     list.remove(0);
                     for (String line: list) {
                         String[] splitLines = line.split(",");
@@ -50,30 +52,31 @@ public class Parser {
 
                             tags = tags.replaceAll("\"", "");
                             String[] split = tags.split("\\|");
-/*
+
+                            /*
 
                             //String[] split = tags.split("|");
                             List<String> collect = Stream.of(tags)
                                     .map(e -> e.split("\\|"))
                                     .flatMap(e-> Arrays.stream(e))
                                     .collect(Collectors.toList());
-
-*/
+                            */
 
                             List<Tag> tagsList = new ArrayList<>();
 
                             for (String tagName:split) {
                                 Tag tag = new Tag();
                                 tag.setName(tagName);
-                                tagRepository.save(tag);
                                 tagsList.add(tag);
                             }
 
                             try {
                                 Video video = new Video();
                                 video.setTitle(splitLines[2].replaceAll("\"",""));
-                                video.setChannel_title(splitLines[3]);
+                                video.setChannel_title(splitLines[3].replaceAll("\"",""));
                                 video.setCountry(country);
+                                video.setThumbnail_link(splitLines[11]);
+                                video.setVideo_id(splitLines[0]);
                                 video.setDescription(splitLines[12]);
                                 video.setCategory_id(Integer.parseInt(splitLines[4]));
                                 video.setViews(Integer.parseInt(splitLines[7]));
@@ -89,7 +92,6 @@ public class Parser {
                                 System.out.println("##########################################################");
                                 e1.printStackTrace();
                             }
-
                         }
                     }
 

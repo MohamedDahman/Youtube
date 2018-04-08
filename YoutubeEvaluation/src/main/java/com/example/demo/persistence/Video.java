@@ -13,30 +13,34 @@ public class Video {
     @Id
     @GeneratedValue
     private Long Id;
+
+    private String video_id;// this attribute responsible to get the video from Youtube
+
     private String country;
 
     private Date trending_date;
+
     private String title;
     private String channel_title;
     private Integer category_id;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Tag> tags = new ArrayList<>();
 
     private Integer views;
+
     private Integer likes;
     private Integer dislikes;
     private Integer comment_count;
     private String thumbnail_link;
     private String description;
 
-
     public Video() {
 
     }
 
     public Video(Date trending_date, String title, String channel_title, Integer category_id, List<Tag> tags, Integer views, Integer likes, Integer dislikes, Integer comment_count, String thumbnail_link, String description) {
-        // TODO: 3/14/2018
+
         this.trending_date = trending_date;
         this.title = title;
         this.channel_title = channel_title;
@@ -48,6 +52,14 @@ public class Video {
         this.comment_count = comment_count;
         this.thumbnail_link = thumbnail_link;
         this.description = description;
+    }
+
+    public String getVideo_id() {
+        return video_id;
+    }
+
+    public void setVideo_id(String video_id) {
+        this.video_id = video_id;
     }
 
     public Long getId() {

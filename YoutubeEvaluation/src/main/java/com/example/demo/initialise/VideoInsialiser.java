@@ -1,10 +1,6 @@
 package com.example.demo.initialise;
 
-import com.example.demo.model.CountriesFiles;
 import com.example.demo.parser.Parser;
-import com.example.demo.persistence.Tag;
-import com.example.demo.persistence.TagRepository;
-import com.example.demo.persistence.Video;
 import com.example.demo.persistence.VideoRepository;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
@@ -15,17 +11,21 @@ import org.springframework.context.annotation.Configuration;
 public class VideoInsialiser {
 
     @Bean
-    ApplicationRunner applicationRunner(VideoRepository videoRepository, TagRepository tagRepository){
+    ApplicationRunner applicationRunner(VideoRepository videoRepository){
         return applicationArguments -> {
 
+            System.out.println("start application runner");
+            videoRepository.deleteAll();
 
-            Parser parser = new Parser(videoRepository, tagRepository);
+
+            Parser parser = new Parser(videoRepository);
 
             parser.moveDateFromFilesToDataBase("USA");
 
             videoRepository.findAll().forEach(System.out::println);
 
-/*
+
+            /*
 
             CountriesFiles countriesFiles = new CountriesFiles();
             Map countryMap = countriesFiles.countryData();

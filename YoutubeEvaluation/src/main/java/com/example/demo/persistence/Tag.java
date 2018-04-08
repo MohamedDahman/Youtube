@@ -12,6 +12,7 @@ public class Tag {
     @Id
     @GeneratedValue
     private Integer Id;
+
     @Column(nullable = false)
     @NotNull
     private String name;

@@ -34,17 +34,15 @@ public class VideoController {
                 .stream()
                 .limit(3)
                 .forEach(e -> System.out.println(e.toString()));
-        session.setAttribute("KOKO","Mohamed");
+        session.setAttribute("userName","Mohamed");
         Object koKo = null;
         try {
-            koKo = session.getAttribute("KOKO");
-            model.addAttribute("KOKO", koKo.toString());
+            koKo = session.getAttribute("userName");
+            model.addAttribute("userName", koKo.toString());
         } catch (Exception e) {
-            model.addAttribute("KOKO", "user not login .....!");
+            model.addAttribute("userName", "user not login .....!");
             e.printStackTrace();
         }
-
-
 
         /*HttpServletRequest request = null;
         request.getSession().setAttribute("koko", "Mohamed");
